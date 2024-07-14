@@ -10,7 +10,7 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
 
-        # создаем тестовых исполнителей
+        # Создание пользователей
         user1 = Users(first_name='Robert', last_name='Vasquez', username='VasROB',
                       password=generate_password_hash('{YqT=N0<1i'))
         user2 = Users(first_name='James', last_name='Waters', username='JAwater',

@@ -4,20 +4,23 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from models import Users, db
 
+# Подключение к базе данных
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:rtf558Ur@localhost/Task'
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
 db.init_app(app)
+
+# Подключение модуля LoginManager
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-
+# Проверка вхождения в аккаунт
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
-
+# Объявление страницы главной страницы
 @app.route('/')
 def index():
     if current_user.is_authenticated:
@@ -25,7 +28,7 @@ def index():
     else:
         return render_template('index.html')
 
-
+# Объявление страницы /login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -41,7 +44,7 @@ def login():
             flash('Неправильный логин или пароль')
     return render_template('login.html')
 
-
+# Объявление страницы /register
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -63,7 +66,7 @@ def register():
             return redirect(url_for('login'))
     return render_template('register.html')
 
-
+# Объявление страницы /users
 @app.route('/users', methods=['GET'])
 def users():
     if current_user.is_authenticated:
@@ -72,13 +75,14 @@ def users():
     else:
         return redirect(url_for('login'))
 
-
+# Функция выхода из аккаунта
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
 
+# Объявление страницы /add
 @app.route('/add', methods=['GET', 'POST'])
 def add():
     if request.method == 'POST':
