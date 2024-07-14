@@ -1,9 +1,10 @@
 from flask import Flask
 from models import Users, db
 from werkzeug.security import generate_password_hash
+from config import user, password, db_name
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:rtf558Ur@localhost/Task'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user}:{password}@localhost/{db_name}'
 db.init_app(app)
 
 if __name__ == '__main__':
