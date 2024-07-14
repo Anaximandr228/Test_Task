@@ -3,7 +3,7 @@ from models import Users, db
 from werkzeug.security import generate_password_hash
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:password@localhost/db_name' #Смените 'user' 'password' 'db_name' на свои данные PostgresSQL
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:rtf558Ur@localhost/Task'
 db.init_app(app)
 
 if __name__ == '__main__':

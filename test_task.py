@@ -6,7 +6,7 @@ from models import Users, db
 
 # Подключение к базе данных
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:password@localhost/db_name' #Смените 'user' 'password' 'db_name' на свои данные PostgresSQL
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:rtf558Ur@localhost/Task'
 app.config['SECRET_KEY'] = 'secret-key-goes-here'
 db.init_app(app)
 
