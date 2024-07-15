@@ -15,10 +15,12 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+
 # Проверка вхождения в аккаунт
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
+
 
 # Объявление страницы главной страницы
 @app.route('/')
@@ -27,6 +29,7 @@ def index():
         return redirect(url_for('users'))
     else:
         return render_template('index.html')
+
 
 # Объявление страницы /login
 @app.route('/login', methods=['GET', 'POST'])
@@ -43,6 +46,7 @@ def login():
         else:
             flash('Неправильный логин или пароль')
     return render_template('login.html')
+
 
 # Объявление страницы /register
 @app.route('/register', methods=['GET', 'POST'])
@@ -66,6 +70,7 @@ def register():
             return redirect(url_for('login'))
     return render_template('register.html')
 
+
 # Объявление страницы /users
 @app.route('/users', methods=['GET'])
 def users():
@@ -74,6 +79,7 @@ def users():
         return render_template('users.html', user=current_user, users_list=users_list)
     else:
         return redirect(url_for('login'))
+
 
 # Функция выхода из аккаунта
 @app.route('/logout')
