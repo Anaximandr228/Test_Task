@@ -60,13 +60,13 @@ def register():
         last_name = request.form['last_name']
         user = Users.query.filter_by(username=username).first()
         if user:
-            flash('Username already taken')
+            flash('Данный логин уже занят')
         else:
             hashed_password = generate_password_hash(password)
             new_user = Users(username=username, password=hashed_password, first_name=first_name, last_name=last_name)
             db.session.add(new_user)
             db.session.commit()
-            flash('Account created successfully')
+            flash('Вы успешно зарегистрировались')
             return redirect(url_for('login'))
     return render_template('register.html')
 
